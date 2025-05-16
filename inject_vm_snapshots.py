@@ -88,7 +88,7 @@ def main():
     else:
         use_backingstore = flag.lower() in ("1", "true", "yes", "y")
     if use_backingstore:
-        print(f"Please make a new snapshot before booting up the VM: {vm_name}")
+        print(f'Please check Usage section in the README before booting up the VM: {vm_name}')
 
     inject_snapshots(domain, uuid, db_path, use_backingstore)
 
