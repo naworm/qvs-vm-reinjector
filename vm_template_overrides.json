@@ -1,0 +1,41 @@
+{
+    "vms_vm": {
+        "debian910": {
+            "libvirt_name": "",
+            "boot_menu": 0,
+            "boot_order": "hd",
+            "keymap": "fr",
+            "cpu_model": "host",
+            "machine": "pc-i440fx-7.0",
+            "bios": "seabios",
+            "video_type": "vga",
+            "auto_start": "off",
+            "auto_start_state": "stop",
+            "auto_start_delay": 600,
+            "usb": "3",
+            "sound": null,
+            "qvm": 0,
+            "test": 0,
+            "rollback": null,
+            "snapshot_type": "external",
+            "host_cpu": "AMD Embedded R-Series RX-421ND",
+            "nas_model": "TS-XA73",
+            "auto_start_detach_device": 1,
+            "channel_switch": "{\"previous\": true, \"current\": true}",
+            "hide_kvm_sign": 0,
+            "arch": "x86",
+            "source": "generic",
+            "ballooning": 0,
+            "ballooning_rsvd": 268435456,
+            "hot_plug_cpu": 0,
+            "memory_sharing": 1,
+            "create_time": "2025-05-14 19:35:26.369152",
+            "last_bootup_time": "2025-05-14 20:19:33.186938",
+            "last_shutdown_time": "2025-05-14 20:19:46.998520",
+            "last_suspend_time": null,
+            "cpuset_policy_id": 1,
+            "running_before_upgrade": 0,
+            "tpm_model": null
+        }
+    }
+}
