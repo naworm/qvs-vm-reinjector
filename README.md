@@ -31,26 +31,21 @@ python3 inject_vm_full.py \
   [--after-boot]
 ```
 
-⚠️ Warning: Using this option may break the snapshot structure in Virtualization Station. To avoid issues: 
-- Make sure the VM is shut down or remains powered off
-- Then, delete all associated snapshots from the Virtualization Station GUI
+> Use `--after-boot` if the VM was running or had been rebooted after the last snapshot (hot backup scenario).
 
-An error may appear once:
+⚠️ **Warning**: Using this option may break the snapshot structure in Virtualization Station. To avoid issues:  
+- Ensure the VM is **shut down** or stays **powered off**
+- Then, delete all associated snapshots from the **Virtualization Station GUI**
+
+You may encounter this error once:
+
 ```
 [Virtualization Station] Failed to delete snapshot "Snapshot_145706" for virtual machine "srvdocker". Error message: 'NoneType' object has no attribute 'children'
 ```
-To resolve this, manually delete the remaining .xml file inside the VM's `snapshot/` directory (within the .meta folder), then the snapshot structure should be fixed.
 
-
-> Use `--after-boot` if the VM was running or rebooted after the last snapshot (hot backup scenario).
-
-If you use the option its higly probable that the snapshot structure become broken. So the p
-shutdown vm or keep it off, delete all snapshots from VS
-an error may appear :
-Error	2025-05-16	15:54:20	---	---	localhost	---	Virtualization Station	Snapshots	[Virtualization Station] Failed to delete snapshot "Snapshot_145706" for virtual machine "srvdocker". Error message: 'NoneType' object has no attribute 'children'
-
-delete the probable unique xml file remaining in snapshot folder, fix.
-
+✅ To fix this:
+- Manually delete the remaining `.xml` file inside the VM’s `snapshot/` directory (within the `.meta` folder)
+- The snapshot structure should then be operational
 
 
 ## 🧠 Design philosophy
