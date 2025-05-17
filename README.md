@@ -6,20 +6,21 @@ This tool parses the original `.meta` folder (XMLs and snapshots), then reinject
 
 ## ✅ Features
 
-- Restores `vms_vm` (UUID, config, template)
-- Reconstructs `vms_disk` from libvirt + snapshot chain
-- Restores `vms_adapter` with preserved MAC/port_id
+- Restores `vms_vm` (UUID, name, config, template)
+  - Use `vm_template_overrides.json` to avoid VM auto_start and force parameters if needed
+- Reconstructs `vms_disk` with image path + snapshot chain
+- Restores `vms_adapter` with preserved MAC
 - Injects VNC graphics config if needed
-- Detects snapshots and corrects snapshot root/active
-- Optional handling for "hot backup" with `--after-boot`
+- Injects snapshot as active disk path (latest)
+  - Optional handling for "hot backup" with `--after-boot` (previous)
 
 ## 💻 Requirements
 
 - Python 3.7+
 - `xmltodict` module
-- Runs outside the NAS (Linux or Windows WSL)
+- Runs outside the NAS (Tested on WSL Debian, Python 3.11+)
 - Access to:
-  - The VM `.meta` folder (extracted from backup)
+  - The VM `.meta` folder (copied from backup)
   - The `qvs.db` file from your QNAP (exported via SCP/SFTP)
 
 ## 🚀 Usage
