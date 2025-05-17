@@ -7,12 +7,12 @@ This tool parses the XML of the VM `.meta` folder, then reinjects all relevant d
 ## ✅ Features
 
 - Restores `vms_vm` (UUID and full config)
-  - `vm_template_overrides.json` avoids VM auto_start and helps you force some parameters in the config, if needed.
+  - `vm_template_overrides.json` avoids VM auto_start and helps you force some parameters in the config
 - Reinjects `vms_disk` with image path + snapshot chain
 - Restores `vms_adapter` with preserved MAC
 - Injects `vms_graphic` VNC minimal config (not customizable for now)
 - Injects snapshot as active disk path (latest snapshot)
-  - Optional handling for "hot backup" with `--after-boot` (previous snapshot)
+  - Optional handling for "hot backup" with the flag `--after-boot` (previous snapshot)
 
 ## 💻 Requirements
 
