@@ -1,18 +1,19 @@
 # QVS VM Reinjector
 
-**QVS VM Reinjector** is a full restoration toolkit for re-importing Virtualization Station VMs (QNAP) from filesystem backups, especially when `.QKVM` metadata has been lost or QVS has been reset.
+**QVS VM Reinjector** is a full restoration toolkit for re-importing QNAP Virtualization Station VMs from filesystem backups, especially when `.QKVM` database has been lost.
 
-This tool parses the original `.meta` folder (XMLs and snapshots), then reinjects all relevant data directly into the QVS `qvs.db` SQLite database.
+This tool parses the XML of the VM `.meta` folder, then reinjects all relevant data directly into the QVS SQLite database (`qvs.db`).
 
 ## ✅ Features
 
-- Restores `vms_vm` (UUID, name, config, template)
-  - Use `vm_template_overrides.json` to avoid VM auto_start and force parameters if needed
-- Reconstructs `vms_disk` with image path + snapshot chain
+- Restores `vms_vm` (UUID and full config)
+  - `vm_template_overrides.json` avoid VM auto_start. And helps you to force some parameters in the config, if needed.
+- Reinject `vms_disk` with image path + snapshot chain
 - Restores `vms_adapter` with preserved MAC
-- Injects VNC graphics config if needed
-- Injects snapshot as active disk path (latest)
-  - Optional handling for "hot backup" with `--after-boot` (previous)
+- Injects `vms_graphic` VNC minimal config (not customizable for now)
+- Injects snapshot as active disk path (latest snapshot)
+  - Optional handling for "hot backup" with `--after-boot` (previous snapshot)
+
 
 ## 💻 Requirements
 
@@ -34,7 +35,8 @@ python3 inject_vm_full.py \
 
 > Use `--after-boot` if the VM was running or had been rebooted after the last snapshot (hot backup scenario).
 
-⚠️ **Warning**: Using this option may break the snapshot structure in Virtualization Station. To avoid issues:  
+⚠️ **Warning**: In this scenario, it should break the snapshot structure in Virtualization Station. The easy fix is:
+- Obviously making sure that you are not testing on the last copy of your VM backup
 - Ensure the VM is **shut down** or stays **powered off**
 - Then, delete all associated snapshots from the **Virtualization Station GUI**
 
