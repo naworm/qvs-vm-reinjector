@@ -7,13 +7,12 @@ This tool parses the XML of the VM `.meta` folder, then reinjects all relevant d
 ## ✅ Features
 
 - Restores `vms_vm` (UUID and full config)
-  - `vm_template_overrides.json` avoid VM auto_start. And helps you to force some parameters in the config, if needed.
-- Reinject `vms_disk` with image path + snapshot chain
+  - `vm_template_overrides.json` avoids VM auto_start and helps you force some parameters in the config, if needed.
+- Reinjects `vms_disk` with image path + snapshot chain
 - Restores `vms_adapter` with preserved MAC
 - Injects `vms_graphic` VNC minimal config (not customizable for now)
 - Injects snapshot as active disk path (latest snapshot)
   - Optional handling for "hot backup" with `--after-boot` (previous snapshot)
-
 
 ## 💻 Requirements
 
@@ -35,8 +34,8 @@ python3 inject_vm_full.py \
 
 > Use `--after-boot` if the VM was running or had been rebooted after the last snapshot (hot backup scenario).
 
-⚠️ **Warning**: In this scenario, it should break the snapshot structure in Virtualization Station. The easy fix is:
-- Obviously making sure that you are not testing on the last copy of your VM backup
+⚠️ **Warning**: In this scenario, it may break the snapshot structure in Virtualization Station. The easy fix is:
+- Obviously, make sure you are not testing on the last copy of your VM backup
 - Ensure the VM is **shut down** or stays **powered off**
 - Then, delete all associated snapshots from the **Virtualization Station GUI**
 
@@ -50,18 +49,14 @@ You may encounter this error once:
 - Manually delete the remaining `.xml` file inside the VM’s `snapshot/` directory (within the `.meta` folder)
 - The snapshot structure should then be operational
 
-
 ## 🧠 Design philosophy
 
 - Fully idempotent: re-running scripts doesn't create duplicates
 - No destructive DELETEs: only `UPDATE` and smart `INSERT` operations
 - Modular: one Python file per table for easier debugging and testing
 
-
 ## 🔒 Disclaimer
 
 Ensure you keep a full, untouched backup of your system before proceeding, and retain it until all your data has been successfully recovered and a proper backup strategy is in place.
 
 Use at your own risk. While this tool avoids destructive operations, it directly modifies the QNAP Virtualization Station database. Always make a backup of `qvs.db` before performing any injection.
-
-
