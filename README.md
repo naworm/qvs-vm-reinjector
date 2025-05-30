@@ -12,7 +12,7 @@ This tool parses the XML of the VM `.meta` folder, then reinjects all relevant d
 - Restores `vms_adapter` with preserved MAC
 - Injects `vms_graphic` VNC minimal config (not customizable for now)
 - Injects snapshot as active disk path (latest snapshot)
-  - Optional handling for "hot backup" with the flag `--after-boot` (previous snapshot)
+  - Optional handling for "hot backup" with the flag `--before-boot` (previous snapshot)
 
 ## 💻 Requirements
 
@@ -29,10 +29,10 @@ This tool parses the XML of the VM `.meta` folder, then reinjects all relevant d
 python3 inject_vm_full.py \
   --meta_folder /path/to/.uuid.meta \
   --db_path /path/to/qvs.db \
-  [--after-boot]
+  [--before-boot]
 ```
 
-> Use `--after-boot` if the VM was running or had been rebooted after the last snapshot (hot backup scenario).
+> Use `--before-boot` if the VM was running or had been rebooted after the last snapshot (hot backup scenario).
 
 ⚠️ **Warning**: In this scenario, it may break the snapshot structure in Virtualization Station. The easy fix is:
 - Obviously, make sure you are not testing on the last copy of your VM backup

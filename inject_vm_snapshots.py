@@ -81,7 +81,7 @@ def main():
     uuid = domain.get("uuid", os.path.basename(xml_file).replace(".xml", ""))
     vm_name = domain.get("metadata", {}).get("qvs:vm", {}).get("qvs:name", uuid)
 
-    flag = os.environ.get("AFTER_BOOT")
+    flag = os.environ.get("BEFORE_BOOT")
     if flag is None:
         resp = input(f"🧠 Has the VM '{vm_name}' been booted at least once since the last snapshot was taken OR was the backup made while the VM was running? (default is no but safer answer is yes) [y/N] ").strip().lower()
         use_backingstore = resp == "y"

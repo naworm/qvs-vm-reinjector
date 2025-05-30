@@ -4,12 +4,12 @@ import argparse
 import subprocess
 import os
 
-def run_script(script_path, meta_folder, db_path, after_boot=False):
+def run_script(script_path, meta_folder, db_path, before_boot=False):
     env = os.environ.copy()
     env["META_FOLDER"] = meta_folder
     env["DB_PATH"] = db_path
-    if after_boot:
-        env["AFTER_BOOT"] = "1"
+    if before_boot:
+        env["BEFORE_BOOT"] = "1"
     result = subprocess.run(["python3", script_path], env=env)
     if result.returncode != 0:
         print(f"❌ Error while running {script_path}")
@@ -19,7 +19,7 @@ def main():
     parser = argparse.ArgumentParser(description="Inject full VM into QVS DB")
     parser.add_argument("--meta_folder", help="Path to the .meta folder")
     parser.add_argument("--db_path", help="Path to the qvs.db SQLite database")
-    parser.add_argument("--after-boot", action="store_true", help="Use first backingStore instead of active path if VM was booted after last snapshot or backup was hot")
+    parser.add_argument("--before-boot", action="store_true", help="Use first backingStore instead of active path if VM was booted after last snapshot or backup was hot")
     args = parser.parse_args()
 
     meta_folder = args.meta_folder or input("🗂️  Path to meta_folder: ").strip()
@@ -39,7 +39,7 @@ def main():
     for step in steps:
         script_path = os.path.join(base_dir, step)
         print(f"🚀 Running {step}...")
-        run_script(script_path, meta_folder, db_path, after_boot=args.after_boot)
+        run_script(script_path, meta_folder, db_path, before_boot=args.before_boot)
 
     print("✅ All steps completed successfully. Please consider creating backup plans in Virtualization Station.")
 
